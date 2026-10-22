@@ -1,0 +1,1 @@
+The SQLite database file `smartpark.db` is created automatically by `backend/database.js` when you run `npm start`. It is intentionally not included in source control; sample data is seeded on first launch.

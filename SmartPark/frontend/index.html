@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18231f">
+  <title>SmartPark — Parking, considered.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SmartPark home"><span class="brand-mark"><span></span><span></span><span></span></span><span>smart<span class="brand-light">park</span><small>URBAN MOBILITY SYSTEM</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">▦</span> Overview <span class="nav-indicator"></span></a>
+        <a class="nav-link" href="#inventory"><span class="nav-icon">⌗</span> Parking inventory</a>
+        <a class="nav-link" href="#allocation"><span class="nav-icon">↗</span> Allocation desk</a>
+        <a class="nav-link" href="#activity"><span class="nav-icon">◷</span> Activity log</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="status-card"><span class="pulse"></span><div><strong>System operational</strong><small>DATABASE CONNECTED</small></div></div>
+        <div class="sidebar-foot"><span>SMARTPARK / 01</span><span>v1.0.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb"><span>CONTROL ROOM</span><span class="crumb-slash">/</span><strong>OVERVIEW</strong></div>
+        <div class="top-right"><span class="live-dot"></span><span>LIVE INVENTORY</span><span class="top-divider"></span><span id="today">--</span><button class="avatar" title="Operator">SP</button></div>
+      </header>
+
+      <section class="hero" id="overview">
+        <div class="hero-image"></div><div class="hero-shade"></div>
+        <div class="hero-content">
+          <div class="eyebrow"><span class="eyebrow-line"></span> PARKING INTELLIGENCE <span class="eyebrow-index">01 — 04</span></div>
+          <h1>Make room<br>for <em>what moves.</em></h1>
+          <p>A clearer view of every space. Find, allocate, and manage parking with precision.</p>
+          <a class="hero-link" href="#allocation">Open allocation desk <span>↗</span></a>
+        </div>
+        <div class="hero-caption"><span>FIG. 01</span><span>SPATIAL INVENTORY / ACTIVE</span></div>
+      </section>
+
+      <section class="metrics" aria-label="Parking summary">
+        <article class="metric"><div class="metric-top"><span>TOTAL CAPACITY</span><span class="metric-symbol">▤</span></div><div class="metric-value" id="totalCount">—</div><div class="metric-foot"><span class="metric-note">Registered spaces</span><span class="metric-tag">ALL ZONES</span></div></article>
+        <article class="metric"><div class="metric-top"><span>AVAILABLE NOW</span><span class="metric-symbol green">↗</span></div><div class="metric-value" id="availableCount">—</div><div class="metric-foot"><span class="metric-note"><i class="tiny-dot"></i> Ready to allocate</span><span class="metric-tag green-tag">OPEN</span></div></article>
+        <article class="metric"><div class="metric-top"><span>IN USE</span><span class="metric-symbol">▣</span></div><div class="metric-value" id="allocatedCount">—</div><div class="metric-foot"><span class="metric-note">Active allocations</span><span class="metric-tag">OCCUPIED</span></div></article>
+        <article class="metric"><div class="metric-top"><span>WAITING VEHICLES</span><span class="metric-symbol amber">↻</span></div><div class="metric-value" id="waitingCount">—</div><div class="metric-foot"><span class="metric-note">Priority queue</span><span class="metric-tag amber-tag">QUEUED</span></div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel spatial-panel">
+          <div class="panel-head"><div><div class="eyebrow dark-eyebrow">01 / SPATIAL OVERVIEW</div><h2>Parking landscape</h2></div><span class="mini-live"><i></i> LIVE</span></div>
+          <div class="landscape">
+            <div class="map-label">SITE PLAN <span>NOT TO SCALE</span></div>
+            <div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-road road-three"></div>
+            <div class="zone zone-a"><span class="zone-name">A / NORTH</span><div class="bay-row"><i class="bay open"></i><i class="bay open ev"></i><i class="bay occupied"></i></div></div>
+            <div class="zone zone-b"><span class="zone-name">B / CENTRAL</span><div class="bay-row"><i class="bay open bike"></i><i class="bay open"></i><i class="bay open ev"></i></div></div>
+            <div class="zone zone-c"><span class="zone-name">C / EAST</span><div class="bay-row"><i class="bay open"></i><i class="bay open accessible"></i><i class="bay occupied"></i></div></div>
+            <div class="zone zone-d"><span class="zone-name">D / SOUTH</span><div class="bay-row"><i class="bay open bike"></i><i class="bay open"></i><i class="bay open ev"></i></div></div>
+            <div class="map-compass">N <span>↑</span></div><div class="map-coordinate">19°04' N / 72°52' E</div>
+          </div>
+          <div class="legend"><span><i class="legend-dot open-dot"></i> Available</span><span><i class="legend-dot occupied-dot"></i> Allocated</span><span><i class="legend-dot ev-dot"></i> EV / special</span><button class="text-button" id="viewInventory">View inventory ↗</button></div>
+        </article>
+
+        <article class="panel allocation-panel" id="allocation">
+          <div class="panel-head"><div><div class="eyebrow dark-eyebrow">02 / QUICK ACTION</div><h2>Allocation desk</h2></div><span class="panel-count">01</span></div>
+          <p class="panel-intro">Register a vehicle. SmartPark ranks compatible spaces by priority and distance.</p>
+          <form id="allocateForm">
+            <label for="vehicleNumber">VEHICLE REGISTRATION</label><input id="vehicleNumber" placeholder="e.g. MH 02 AB 4821" maxlength="15" required>
+            <div class="form-two"><div><label for="vehicleType">VEHICLE TYPE</label><select id="vehicleType"><option>Car</option><option>Bike</option><option>EV</option><option>Accessible</option></select></div><div><label for="priority">REQUEST PRIORITY</label><select id="priority"><option value="1">01 · Critical</option><option value="2">02 · High</option><option value="3" selected>03 · Standard</option><option value="4">04 · Low</option><option value="5">05 · Lowest</option></select></div></div>
+            <label for="preference">SPACE PREFERENCE</label><select id="preference"><option>Any</option><option>EV</option><option>Accessible</option><option>Car</option><option>Bike</option></select>
+            <button class="primary-button" type="submit">Find & allocate space <span>↗</span></button>
+            <div class="form-note"><span class="lock-mark">⌘</span> PRIORITY QUEUE ENABLED <span class="form-note-right">AUTO-ASSIGN</span></div>
+          </form>
+          <div id="allocationResult" class="result-box" hidden></div>
+        </article>
+      </section>
+
+      <section class="panel inventory-panel" id="inventory">
+        <div class="panel-head inventory-heading"><div><div class="eyebrow dark-eyebrow">03 / SPACE MANAGEMENT</div><h2>Parking inventory <span class="count-chip" id="inventoryCount">12</span></h2></div><div class="inventory-actions"><button class="outline-button" id="exportBtn">↓ Export CSV</button><button class="dark-button" id="addSlotBtn">＋ Add space</button></div></div>
+        <div class="table-tools"><div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search by slot ID (binary search)..." autocomplete="off"><kbd>↵</kbd></div><div class="table-filter"><span>SORT BY</span><select id="sortSelect"><option value="id">Slot ID</option><option value="distance">Distance</option><option value="priority">Priority</option><option value="location">Location</option></select><button id="sortDirection" class="sort-direction" title="Toggle sort order">↑</button></div></div>
+        <div id="searchMessage" class="search-message" hidden></div>
+        <div class="table-wrap"><table><thead><tr><th>SPACE ID</th><th>LOCATION</th><th>VEHICLE TYPE</th><th>DISTANCE</th><th>PRIORITY</th><th>STATUS</th><th>ASSIGNED TO</th><th></th></tr></thead><tbody id="slotsBody"><tr><td colspan="8" class="loading-cell">Loading inventory…</td></tr></tbody></table></div>
+        <div class="table-footer"><span id="tableSummary">Loading spaces</span><span class="algorithm-note"><i></i> SORTED INDEX · BINARY SEARCH READY</span></div>
+      </section>
+
+      <section class="bottom-grid" id="activity">
+        <article class="panel queue-panel"><div class="panel-head"><div><div class="eyebrow dark-eyebrow">04 / PRIORITY ENGINE</div><h2>Waiting queue</h2></div><span class="queue-count" id="queuePill">0 IN LINE</span></div><p class="panel-intro">A min-heap serves lower-numbered priority requests first. Arrival order breaks ties.</p><div id="queueList" class="queue-list"><div class="empty-state">No vehicles waiting. A rare moment of order.</div></div><div class="queue-foot"><span>HEAP STATUS</span><span><i class="tiny-dot"></i> ACTIVE</span></div></article>
+        <article class="panel activity-panel"><div class="panel-head"><div><div class="eyebrow dark-eyebrow">SYSTEM TRACE</div><h2>Recent activity</h2></div><span class="activity-icon">◷</span></div><div id="activityList" class="activity-list"><div class="empty-state">Loading event stream…</div></div><div class="activity-footer"><span>LAST 30 EVENTS</span><span>SQL PERSISTED</span></div></article>
+      </section>
+      <footer class="page-footer"><span>SMARTPARK <b>—</b> A PARKING INTELLIGENCE SYSTEM</span><span>DESIGNED FOR CLEARER MOVEMENT <span class="footer-star">✳</span></span></footer>
+    </main>
+  </div>
+
+  <dialog id="slotDialog" class="modal">
+    <form id="slotForm" method="dialog">
+      <div class="modal-top"><div><div class="eyebrow dark-eyebrow">INVENTORY / NEW RECORD</div><h2>Add a parking space</h2></div><button class="close-button" type="button" id="closeDialog">×</button></div>
+      <p class="modal-copy">Add a space to the inventory. The backend validates the record and stores it in SQLite.</p>
+      <label for="slotId">SPACE ID</label><input id="slotId" placeholder="e.g. E-01" required maxlength="12">
+      <label for="slotLocation">LOCATION</label><input id="slotLocation" placeholder="e.g. West wing" required>
+      <div class="form-two"><div><label for="slotType">VEHICLE TYPE</label><select id="slotType"><option>Any</option><option>Car</option><option>Bike</option><option>EV</option><option>Accessible</option></select></div><div><label for="slotDistance">DISTANCE (METRES)</label><input id="slotDistance" type="number" min="0" step="1" value="50" required></div></div>
+      <label for="slotPriority">SPACE PRIORITY (1 = HIGHEST)</label><select id="slotPriority"><option value="1">01 · Critical</option><option value="2">02 · High</option><option value="3" selected>03 · Standard</option><option value="4">04 · Low</option><option value="5">05 · Lowest</option></select>
+      <div class="modal-actions"><button class="outline-button" type="button" id="cancelDialog">Cancel</button><button class="dark-button" type="submit">Save space ↗</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
